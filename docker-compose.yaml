@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - iam
+    networks:
+      - iam-network
+
+  iam:
+    image: todimuisewon/customized-iam:v1.1
+    expose:
+      - "8080"
+#      - "9000"
+#      - "8443"
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - iam-network
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "true" ]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+
+  database:
+    image: mysql:8.0.39
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: keycloak
+    volumes:
+      - iam-volume:/var/lib/mysql
+    networks:
+      - iam-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword" ]
+      interval: 10s
+      timeout: 20s
+      retries: 10
+      start_period: 40s
+
+networks:
+  iam-network:
+    driver: bridge
+
+volumes:
+  iam-volume:
+    driver: local
