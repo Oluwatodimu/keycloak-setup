@@ -33,7 +33,7 @@ services:
   iam-1:
     image: todimuisewon/customized-iam:v1.0.0
     ports:
-      - "9081:8080"
+      - "8080"
     restart: unless-stopped
     env_file:
       - .env
@@ -52,7 +52,7 @@ services:
   iam-2:
     image: todimuisewon/customized-iam:v1.0.0
     ports:
-      - "9082:8080"
+      - "8080"
     restart: unless-stopped
     env_file:
       - .env
@@ -71,7 +71,7 @@ services:
   iam-3:
     image: todimuisewon/customized-iam:v1.0.0
     ports:
-      - "9083:8080"
+      - "8080"
     restart: unless-stopped
     env_file:
       - .env
