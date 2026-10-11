@@ -106,6 +106,19 @@ services:
       retries: 10
       start_period: 40s
 
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MH_STORAGE: memory
+      MH_HOSTNAME: mailhog.local
+    networks:
+      - iam-network
+
 networks:
   iam-network:
     driver: bridge
