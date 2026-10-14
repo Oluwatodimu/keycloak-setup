@@ -131,3 +131,15 @@
   color: var(--greshfi-muted);
   border-top-color: var(--greshfi-border);
 }
+
+/* logo: icon + wordmark in one image (Option B).
+   Needs the realm's HTML Display name set to:
+   <div class="kc-logo-text"><span>Greshfi</span></div> */
+div.kc-logo-text {
+  background-image: url("../img/logo-dark-text.svg");
+  width: 200px;
+  height: 58px;
+}
+.pf-v5-theme-dark div.kc-logo-text {
+  background-image: url("../img/logo-light-text.svg");
+}
