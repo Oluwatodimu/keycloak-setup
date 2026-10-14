@@ -1,6 +1,7 @@
 <#--
   Greshfi email wrapper: every HTML email is rendered inside this layout.
   The text of each email comes from its "...BodyHtml" key in messages/messages_en.properties.
+  The greeting ("Hi {first name},") comes from the emailGreeting key and is skipped if the user has no first name.
 
   Email apps ignore external CSS, so styles are inline (plus a small <style> block
   for the links and paragraphs that come from the message text).
@@ -50,6 +51,9 @@
           <!-- body: the message text goes here -->
           <tr>
             <td class="gf-card gf-body" style="background:#ffffff; border:1px solid #e5e7eb; border-top:none; border-radius:0 0 14px 14px; padding:36px 40px; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:1.6; color:#374151;">
+              <#if user?? && user.firstName?has_content>
+                <p style="margin:0 0 16px;">${msg("emailGreeting", user.firstName?cap_first)}</p>
+              </#if>
               <#nested>
             </td>
           </tr>
