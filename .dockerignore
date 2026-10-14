@@ -1,0 +1,9 @@
+.env
+.git
+.gitignore
+.idea
+**/target
+keycloak-themes.jar
+nginx-lb
+docker-compose.yaml
+Dockerfile
