@@ -1,6 +1,0 @@
-{
-  "themes": [{
-    "name" : "greshfi",
-    "types": [ "login", "email" ]
-  }]
-}
