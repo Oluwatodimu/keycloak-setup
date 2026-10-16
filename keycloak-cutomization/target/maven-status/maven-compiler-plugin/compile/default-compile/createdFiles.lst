@@ -1,0 +1,4 @@
+com/todimu/keycloak/events/KafkaEventListenerProvider.class
+com/todimu/keycloak/events/KafkaEventListenerProviderFactory.class
+com/todimu/keycloak/events/KafkaEventPublisher.class
+com/todimu/keycloak/events/KafkaEventListenerProvider$1.class
