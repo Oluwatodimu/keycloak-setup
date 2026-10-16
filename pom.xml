@@ -11,6 +11,7 @@
 
     <modules>
         <module>keycloak-theme</module>
+        <module>keycloak-cutomization</module>
     </modules>
 
 </project>

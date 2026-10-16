@@ -18,6 +18,7 @@ ENV KC_DB=mysql
 WORKDIR /opt/keycloak
 
 COPY --from=MAVEN_BUILD ./keycloak-theme/target/*.jar /opt/keycloak/providers
+COPY --from=MAVEN_BUILD ./keycloak-cutomization/target/keycloak-cutomization-*.jar /opt/keycloak/providers/
 
 RUN /opt/keycloak/bin/kc.sh build
 
