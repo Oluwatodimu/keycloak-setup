@@ -1,21 +1,6 @@
 version: '3.9'
 
 services:
-#  nginx:
-#    image: nginx:1.27-alpine
-#    container_name: nginx-proxy
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    volumes:
-#      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-#      - ./certbot/www:/var/www/certbot
-#      - ./certbot/conf:/etc/letsencrypt
-#    depends_on:
-#      - iam
-#    networks:
-#      - iam-network
-
   nginx-lb:
     image: nginx:1.27-alpine
     ports:
@@ -31,7 +16,7 @@ services:
     restart: unless-stopped
 
   iam-1:
-    image: todimuisewon/customized-iam:v1.0.0
+    image: todimuisewon/customized-iam-customized:v1.0.0
     ports:
       - "8080"
     restart: unless-stopped
@@ -50,7 +35,7 @@ services:
       start_period: 60s
 
   iam-2:
-    image: todimuisewon/customized-iam:v1.0.0
+    image: todimuisewon/customized-iam-customized:v1.0.0
     ports:
       - "8080"
     restart: unless-stopped
@@ -69,7 +54,7 @@ services:
       start_period: 60s
 
   iam-3:
-    image: todimuisewon/customized-iam:v1.0.0
+    image: todimuisewon/customized-iam-customized:v1.0.0
     ports:
       - "8080"
     restart: unless-stopped

@@ -1,3 +1,11 @@
+FROM maven:3.9.6-eclipse-temurin-21 AS MAVEN_BUILD
+
+# copy the pom and src code to the container
+COPY ./ ./
+
+# package our application code
+RUN mvn clean package
+
 FROM quay.io/keycloak/keycloak:26.7.3 AS builder
 
 ENV KC_HEALTH_ENABLED=true
@@ -8,6 +16,9 @@ ENV QUARKUS_TRANSACTION_MANAGER_ENABLE_RECOVERY=true
 ENV KC_DB=mysql
 
 WORKDIR /opt/keycloak
+
+COPY --from=MAVEN_BUILD ./keycloak-theme/target/*.jar /opt/keycloak/providers
+COPY --from=MAVEN_BUILD ./keycloak-cutomization/target/keycloak-cutomization-*.jar /opt/keycloak/providers/
 
 RUN /opt/keycloak/bin/kc.sh build
 
